@@ -11,29 +11,30 @@ public:
 	
 	void push(T item)
 	{
-		std::unique_lock<std::mutex> lock(m_mutex);
-		m_queue.push(item);
-		m_cond.notify_one();
+		std::unique_lock<std::mutex> lock(_mutex);
+		_queue.push(item);
+		_cond.notify_one();
 	}
 
 	T pop()
 	{
-		std::unique_lock<std::mutex> lock(m_mutex);
-		m_cond.wait(lock,
-			[this]() { return !m_queue.empty(); });
-		T item = m_queue.front();
-		m_queue.pop();
+		std::unique_lock<std::mutex> lock(_mutex);
+		_cond.wait(lock,
+			[this]() { return !_queue.empty(); });
+		T item = _queue.front();
+		_queue.pop();
 
 		return item;
 	}
 
 	bool empty() const
 	{
-		return m_queue.empty();
+		std::lock_guard<std::mutex> lg(_mutex);
+		return _queue.empty();
 	}
 
 private:
-	std::queue<T> m_queue;
-	std::mutex m_mutex;
-	std::condition_variable m_cond;
+	std::queue<T> _queue;
+	mutable std::mutex _mutex;
+	std::condition_variable _cond;
 };
