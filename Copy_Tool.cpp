@@ -35,5 +35,10 @@ void CopyTool::copy()
     {      
         _writer.write(_data.pop());
     }
+
+    while (!_data.empty())
+    {
+        _writer.write(_data.pop());
+    }
 }
 

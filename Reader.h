@@ -37,7 +37,7 @@ public:
         std::vector<char> buffer(4096, '\0');
         _source.read(buffer.data(), 4096);
         const size_t actual = _source.gcount();
-        buffer.resize(actual);
+        buffer.resize(actual + 1);
         return buffer;
     }
 

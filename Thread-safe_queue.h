@@ -27,6 +27,11 @@ public:
 		return item;
 	}
 
+	bool empty() const
+	{
+		return m_queue.empty();
+	}
+
 private:
 	std::queue<T> m_queue;
 	std::mutex m_mutex;
