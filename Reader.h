@@ -10,7 +10,7 @@ class Reader
 {
 public:
     Reader() = default;
-    Reader(const std::string & path)
+    Reader(const std::string& path)
     {
         open(path);
     }
@@ -34,8 +34,8 @@ public:
 
     std::vector<char> read()
     {
-        std::vector<char> buffer(4096, '\0');
-        _source.read(buffer.data(), 4096);
+        std::vector<char> buffer(1048576, '\0');
+        _source.read(buffer.data(), 1048576);
         const size_t actual = _source.gcount();
         buffer.resize(actual + 1);
         return buffer;

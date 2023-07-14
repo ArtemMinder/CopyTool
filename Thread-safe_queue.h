@@ -9,7 +9,7 @@ class TSQueue
 {
 public:
 	
-	void push(T item)
+	void push(const T& item)
 	{
 		std::unique_lock<std::mutex> lock(_mutex);
 		_queue.push(item);

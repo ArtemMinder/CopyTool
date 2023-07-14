@@ -23,7 +23,7 @@ public:
 			throw std::runtime_error("Target file not found");
 	}
 
-	void write(std::vector<char> data)
+	void write(const std::vector<char>& data)
 	{ 
 		_file << data.data(); 
 	}

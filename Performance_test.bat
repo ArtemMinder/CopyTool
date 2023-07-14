@@ -1,13 +1,13 @@
 @echo off
 setlocal EnableDelayedExpansion
 
-set /A fileSize = 1000000000
+set /A fileSize = 100000000
 fsutil file createnew source.txt %fileSize%
-fsutil file createnew target.txt 1
+rem fsutil file createnew target.txt 1
 
 set "startTime=%time%"
 
-call..\Debug\Copy_Tool.exe"
+call..\Debug\Copy_Tool.exe source.txt target.txt
 
 set "endTime=%time%"
 
@@ -23,6 +23,6 @@ echo End:      %endTime%
 echo Elapsed:  %hh:~1%%time:~2,1%%mm:~1%%time:~2,1%%ss:~1%%time:~8,1%%cc:~1%
 echo Speed: %speed% mb/s
 
-del source.txt
+rem del source.txt
 
 pause
